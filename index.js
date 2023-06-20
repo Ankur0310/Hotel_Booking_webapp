@@ -13,20 +13,31 @@ const path = require('path');
 connection()
 
 const clientPath=path.join(__dirname, 'client/dist');
-// const adminPath=path.join(__dirname, 'admin/build');
-
-app.use(express.static(clientPath));
-// app.use('/admin', express.static(adminPath));
+const adminPath=path.join(__dirname, 'admin/build');
 
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors());
-
-
 app.use("/auth",authRoute)
 app.use("/hotels",hotelsRoute)
 app.use("/users",userRoute)
 app.use("/rooms",roomsRoute)
+
+app.use(express.static(clientPath));
+//app.use('/admin', express.static(adminPath));
+
+// app.get('/admin', function (_, res){
+//   res.sendFile(path.join(__dirname, "/admin/build/index.html"), function(err){
+//     res.status(500).send(err);
+//   })
+// })
+
+
+// app.get('*', function (_, res){
+//   res.sendFile(path.join(__dirname, "/client/dist/index.html"), function(err){
+//     res.status(500).send(err);
+//   })
+// })
 
 
 
